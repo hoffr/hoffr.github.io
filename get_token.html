@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+<!-- warning: extremely lazy styling ahead -->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Twitch API Authentication Token</title>
+<style>
+  p {
+    text-align: center; font-size: 20px; font-family:arial; color:white;
+  }
+  html, body {
+      margin:0;
+      padding:0;
+  }
+  h1 {
+      margin:0;
+  }
+</style>
+</head>
+<body style="background-color:#152533;">
+
+<br>
+<br>
+<br>
+<br>
+<p>Paste this token into your program:</p>
+<p><input type="text" id="accessToken" style='font-size: 20px; font-family:arial' size="30" readonly> <button style='font-size: 20px; font-family:arial' onclick="copyToClipboard()">Copy to clipboard</button></p>
+<br>
+<p>You can close this page.<p>
+<br>
+
+<script>
+window.onload = function()
+{
+  var currentURL = window.location.href;
+  window.history.replaceState('', 'Title', '/get_token.html'); // hide token from url bar
+  const url = new URL(currentURL);
+  const parsedHash = new URLSearchParams(url.hash.substring(1));
+  document.getElementById("accessToken").value = parsedHash.get("access_token");
+};
+
+function copyToClipboard()
+{
+  var copyText = document.getElementById("accessToken");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  alert("Copied!");
+}
+</script>
+
+</body>
+</html>
